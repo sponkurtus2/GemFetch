@@ -1,0 +1,13 @@
+[package]
+name = "GemFetch"
+version = "0.1.0"
+edition = "2021"
+authors = ["Carlinux <sponkutus098@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/sponkurtus2/GemFetch/"
+description = "A simple neofetch-style inspired in a Gem"
+
+[dependencies]
+colored = "2.2.0"
+unicode-width = "0.2.0"
+whoami = "1.5.2"
