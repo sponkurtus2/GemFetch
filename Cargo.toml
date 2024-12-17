@@ -1,6 +1,6 @@
 [package]
 name = "GemFetch"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["Carlinux <sponkutus098@gmail.com>"]
 readme = "README.md"
@@ -13,3 +13,7 @@ license = "MIT"
 colored = "2.2.0"
 unicode-width = "0.2.0"
 whoami = "1.5.2"
+
+[profile.release]
+lto = true
+codegen-units = 1

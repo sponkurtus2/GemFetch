@@ -2,33 +2,45 @@ use colored::*;
 use std::env;
 use std::path::Path;
 use unicode_width::UnicodeWidthStr;
+use whoami::{desktop_env, distro, fallible, username};
+
+// Old way
+// fn get_shell() -> Option<String> {
+//     if let Ok(shell) = env::var("SHELL") {
+//         return Some(
+//             Path::new(&shell)
+//                 .file_name()?
+//                 .to_string_lossy()
+//                 .into_owned(),
+//         );
+//     }
+//     None
+// }
 
 fn get_shell() -> Option<String> {
-    if let Ok(shell) = env::var("SHELL") {
-        return Some(
-            Path::new(&shell)
-                .file_name()?
-                .to_string_lossy()
-                .into_owned(),
-        );
-    }
-    None
+    env::var("SHELL").ok().and_then(|s| {
+        Path::new(&s)
+            .file_name()
+            .map(|name| name.to_string_lossy().into_owned())
+    })
 }
 
-fn get_host() -> String {
-    whoami::hostname()
+fn get_host() -> Option<String> {
+    fallible::hostname()
+        .ok()
+        .and_then(|s| if s.len() > 1 { Some(s) } else { None })
 }
 
 fn get_user() -> String {
-    whoami::username()
+    username()
 }
 
 fn get_desktop_env() -> String {
-    whoami::desktop_env().to_string()
+    desktop_env().to_string()
 }
 
 fn get_distro() -> String {
-    whoami::distro()
+    distro()
 }
 
 fn center_text(text: &str, width: usize) -> String {
@@ -48,7 +60,10 @@ fn main() {
 
     let shell =
         center_text(&get_shell().unwrap_or_else(|| "".to_string()), COLUMN_WIDTH).bright_green();
-    let host = center_text(&get_host(), COLUMN_WIDTH).bright_yellow();
+
+    let host =
+        center_text(&get_host().unwrap_or_else(|| "".to_string()), COLUMN_WIDTH).bright_yellow();
+
     let user = center_text(&get_user(), COLUMN_WIDTH).bright_blue();
     let desktop_env = center_text(&get_desktop_env(), COLUMN_WIDTH).bright_red();
     let distro = center_text(&get_distro(), COLUMN_WIDTH).bright_magenta();
