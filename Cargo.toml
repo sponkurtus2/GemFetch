@@ -7,6 +7,7 @@ readme = "README.md"
 repository = "https://github.com/sponkurtus2/GemFetch/"
 description = "A simple neofetch-style inspired in a Gem"
 keywords = ["system", "cli"]
+license = "MIT"
 
 [dependencies]
 colored = "2.2.0"
