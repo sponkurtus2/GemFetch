@@ -1,7 +1,8 @@
 use colored::*;
 use os_info::get;
-use std::env;
+use std::fs::File;
 use std::path::Path;
+use std::{env, io::Read};
 use unicode_width::UnicodeWidthStr;
 use whoami::{fallible, username};
 mod gems_art;
@@ -37,16 +38,33 @@ fn get_user() -> String {
     username()
 }
 
-fn get_desktop_env() -> Option<String> {
-    let de_vars = ["XDG_CURRENT_DESKTOP", "DESKTOP_SESSION", "GDMSESSION"];
+fn get_desktop_env() -> String {
+    if env::var("DISPLAY").is_err() {
+        return String::new();
+    }
 
-    for de in de_vars {
-        if let Ok(value) = env::var(de) {
-            return Some(value);
+    for env_var in &[
+        "XDG_SESSION_DESKTOP",
+        "XDG_CURRENT_DESKTOP",
+        "DESKTOP_SESSION",
+    ] {
+        if let Ok(de) = env::var(env_var) {
+            return de;
         }
     }
 
-    None
+    let path = format!("{}/.xinitrc", env::var("HOME").unwrap_or_default());
+    if let Ok(mut file) = File::open(&path) {
+        let mut buf = String::new();
+        if file.read_to_string(&mut buf).is_ok() {
+            if let Some(last_line) = buf.lines().last() {
+                let last_word = last_line.split(' ').last().unwrap_or("");
+                return last_word.to_string();
+            }
+        }
+    }
+
+    String::from("N/A")
 }
 
 fn get_distro() -> String {
@@ -108,12 +126,7 @@ fn main() {
     )
     .bright_yellow();
 
-    let desktop_env = center_text(
-        &get_desktop_env().unwrap_or_else(|| "Unknown DE".to_string()),
-        COLUMN_WIDTH,
-        TOTAL_WIDTH,
-    )
-    .bright_red();
+    let desktop_env = center_text(&get_desktop_env(), COLUMN_WIDTH, TOTAL_WIDTH).bright_red();
 
     let user = center_text(&get_user(), COLUMN_WIDTH, TOTAL_WIDTH).bright_blue();
 
