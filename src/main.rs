@@ -2,7 +2,7 @@ use colored::*;
 use std::env;
 use std::path::Path;
 use unicode_width::UnicodeWidthStr;
-use whoami::{desktop_env, distro, fallible, username};
+use whoami::{fallible, username};
 
 // Old way
 // fn get_shell() -> Option<String> {
@@ -35,12 +35,21 @@ fn get_user() -> String {
     username()
 }
 
-fn get_desktop_env() -> String {
-    desktop_env().to_string()
+fn get_desktop_env() -> Option<String> {
+    let de_vars = ["XDG_CURRENT_DESKTOP", "DESKTOP_SESSION", "GDMSESSION"];
+
+    for de in de_vars {
+        if let Ok(value) = env::var(de) {
+            return Some(value);
+        }
+    }
+
+    None
 }
 
 fn get_distro() -> String {
-    distro()
+    let info = os_info::get();
+    info.os_type().to_string()
 }
 
 fn center_text(text: &str, width: usize) -> String {
@@ -64,8 +73,13 @@ fn main() {
     let host =
         center_text(&get_host().unwrap_or_else(|| "".to_string()), COLUMN_WIDTH).bright_yellow();
 
+    let desktop_env = center_text(
+        &get_desktop_env().unwrap_or_else(|| "Unknown DE".to_string()),
+        COLUMN_WIDTH,
+    )
+    .bright_red();
+
     let user = center_text(&get_user(), COLUMN_WIDTH).bright_blue();
-    let desktop_env = center_text(&get_desktop_env(), COLUMN_WIDTH).bright_red();
     let distro = center_text(&get_distro(), COLUMN_WIDTH).bright_magenta();
 
     let first = "   /\\   ".bright_cyan();

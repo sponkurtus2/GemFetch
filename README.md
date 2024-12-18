@@ -1,5 +1,9 @@
 ![GemFetch](https://github.com/user-attachments/assets/5b7f7bef-33a3-4874-8fd1-4e4798816b2e)
 
+## Support me 🤝
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](buymeacoffee.com/sponkurtus2)
+
 ## Installation 🔨
 ```cargo install GemFetch``` <br>
 
