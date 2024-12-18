@@ -1,5 +1,12 @@
 ![GemFetch](https://github.com/user-attachments/assets/5b7f7bef-33a3-4874-8fd1-4e4798816b2e)
 
+## What does GemFetch do ❓
+GemFetch is a command-line system information tool written in Rust that displays information about your operating system, software, and hardware in an aesthetic and visually pleasing way.
+
+The overall purpose of GemFetch is to be used in screenshots of your system. 
+
+The information is displayed alongside a simple ASCII art design, providing a clean and minimalist view of your system's key details.
+
 ## Support me 🤝
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/sponkurtus2)
