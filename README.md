@@ -2,7 +2,7 @@
 
 ## Support me 🤝
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](buymeacoffee.com/sponkurtus2)
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/sponkurtus2)
 
 ## Installation 🔨
 ```cargo install GemFetch``` <br>
