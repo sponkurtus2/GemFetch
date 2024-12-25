@@ -14,6 +14,9 @@ The information is displayed alongside a simple ASCII art design, providing a cl
 ## Installation 🔨
 ```cargo install GemFetch``` <br>
 
+On NetBSD, a package is available from the [official repositories](https://pkgsrc.se/sysutils/gemfetch). To install it, simply run:
+```pkgin install gemfetch```
+
 ## Acknowledgments 🤝
 
 - First, I want to express my gratitude to <a href="https://github.com/migueravila/Flowetch">Flowfetch</a> for being a source of inspiration for this project.
