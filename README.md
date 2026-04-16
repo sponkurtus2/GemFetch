@@ -20,7 +20,7 @@ On NetBSD, a package is available from the [official repositories](https://pkgsr
 ## Acknowledgments 🤝
 
 - First, I want to express my gratitude to <a href="https://github.com/migueravila/Flowetch">Flowfetch</a> for being a source of inspiration for this project.
-- I also want to thank my girlfriend, who introduced me to Houseki no Kuni. The anime's gem-inspired theme sparked the idea to create a fetch tool with a gem aesthetic.
+- I also want to thank my girlfriend (Not anymore), who introduced me to Houseki no Kuni. The anime's gem-inspired theme sparked the idea to create a fetch tool with a gem aesthetic.
 
 ## About ✨
 This is a simple yet fun project, and I'm excited to share it as my first contribution to crates.io ^^
